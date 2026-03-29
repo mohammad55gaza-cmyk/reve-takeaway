@@ -1,0 +1,1116 @@
+/* ======= الألوان الأساسية - Dark Mode ======= */
+:root {
+    --gold: #a47149;
+    --gold-dark: #8a5d3b;
+    --gold-light: #c89a74;
+    --dark-bg: #000000;
+    /* جعل الخلفية سوداء تماماً لزيادة التباين */
+    /* خلفية سوداء عميقة جدًا */
+    --card-bg: #1a1a1a;
+    /* تفتيح البطاقة قليلاً لتنفصل عن سواد الخلفية */
+    /* لون البطاقات */
+    --card-hover: #222222;
+    /* لون البطاقة عند التمرير */
+    --text-white: #f5f5f5;
+    /* نص أبيض مريح ساطع */
+    --text-muted: #999;
+    /* نص رمادي فرعي */
+    --border-color: rgba(164, 113, 73, 0.4);
+    /* زيادة وضوح الحدود النحاسية */
+    /* حدود بلون النحاس الخشبي خفيفة */
+}
+
+/* ======= Reset عام ======= */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+::selection {
+    background: var(--gold);
+    color: #000;
+}
+
+/* ======= تخصيص شريط التمرير (Scrollbar) ======= */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #000;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(164, 113, 73, 0.4);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--gold);
+}
+
+body {
+    font-family: 'Cairo', sans-serif;
+    background-color: #000;
+    color: var(--text-white);
+    line-height: 1.7;
+    /* مسافة أسطر أفضل للغة العربية */
+    direction: rtl;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* طبقة انعكاس الضوء المتحرك (Luxury Ambient Light) */
+body::after {
+    content: "";
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.02) 40%,
+            rgba(255, 255, 255, 0.05) 50%,
+            rgba(255, 255, 255, 0.02) 60%,
+            transparent 100%);
+    pointer-events: none;
+    z-index: 1000;
+    /* خلف العناصر التفاعلية ولكن فوق الخلفية */
+    animation: ambientLight 20s infinite linear;
+    mix-blend-mode: screen;
+}
+
+@keyframes ambientLight {
+    0% {
+        transform: translate(-10%, -10%) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(10%, 10%) rotate(0deg);
+    }
+}
+
+.main-wrapper {
+    width: 100%;
+    max-width: 1000px;
+    /* توسيع العرض للشاشات الكبيرة */
+    margin: 0 auto;
+    background: var(--dark-bg);
+    min-height: 100vh;
+    box-shadow: 0 0 80px rgba(0, 0, 0, 0.8);
+}
+
+/* ======= الهيدر الجديد: شريط الملاحة الثابت (Sticky Nav) ======= */
+.sticky-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(9, 9, 9, 0.85);
+    /* شفافية زجاجية داكنة */
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 4px 20px rgb(0, 0, 0);
+    padding: 12px 20px;
+}
+
+.sticky-nav .nav-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* شعار الناف بار الصغير */
+.sticky-nav .nav-logo img {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+    object-fit: cover;
+    box-shadow: 0 0 15px rgba(164, 113, 73, 0.2);
+    transition: transform 0.4s ease;
+}
+
+.sticky-nav .nav-logo img:hover {
+    transform: rotate(5deg) scale(1.05);
+}
+
+/* روابط التواصل الاجتماعي في الشريط */
+.sticky-nav .social-links {
+    display: flex;
+    gap: 12px;
+}
+
+.sticky-nav .social-links a {
+    font-size: 1.1rem;
+    /* تكبير الأيقونات قليلاً */
+    color: var(--text-white);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease-out;
+    position: relative;
+    overflow: hidden;
+}
+
+/* تأثير التمرير للروابط (Hover Effect) */
+.sticky-nav .social-links a:hover {
+    color: #000;
+    background: var(--gold);
+    border-color: var(--gold);
+    transform: translateY(-3px) scale(1.1);
+    box-shadow: 0 5px 15px rgba(164, 113, 73, 0.4);
+}
+
+/* ======= قسم البانر الرئيسي (Hero Section) ======= */
+.hero-section {
+    position: relative;
+    height: 60vh;
+    /* ارتفاع أقل قليلاً لأن الناف بار انفصل */
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    margin-top: -1px;
+    /* لتجنب أي فراغ بين الناف والبانر */
+}
+
+/* خلفية البانر */
+.hero-section .hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('bg.jpeg') center/cover no-repeat;
+    filter: blur(6px) brightness(0.25);
+    z-index: 1;
+    transform: scale(1.05);
+}
+
+/* ======== خطوط البلور الذهبية المتحركة ======== */
+.hero-section .blur-glow {
+    position: absolute;
+    z-index: 1;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.4;
+    will-change: transform, opacity;
+    animation: drift 15s infinite alternate ease-in-out, glowPulse 4s infinite alternate ease-in-out;
+    backface-visibility: hidden;
+    transform: translate3d(0, 0, 0);
+}
+
+@keyframes glowPulse {
+    from {
+        opacity: 0.3;
+        filter: blur(60px) scale(1);
+    }
+
+    to {
+        opacity: 0.6;
+        filter: blur(80px) scale(1.1);
+    }
+}
+
+.glow-1 {
+    width: 300px;
+    height: 150px;
+    background: rgba(164, 113, 73, 0.4);
+    /* لون نحاسي ناعم */
+    top: -20%;
+    left: -10%;
+    animation-duration: 25s;
+}
+
+.glow-2 {
+    width: 400px;
+    height: 200px;
+    background: rgba(138, 93, 59, 0.3);
+    /* نحاسي داكن قليلاً */
+    bottom: -30%;
+    right: -20%;
+    animation-duration: 30s;
+    animation-delay: 5s;
+}
+
+/* تطبيق النبض على زر التواصل الأساسي */
+.contact-btn {
+    animation: goldPulse 2s infinite;
+    animation-delay: 1s;
+}
+
+/* ======== زر العودة للأعلى ======== */
+#backToTop {
+    position: fixed;
+    bottom: 40px;
+    right: 30px;
+    /* نقله لليمين وأعلى قليلاً ليكون أوضح ولا يغطيه شريط المتصفح */
+    background: var(--gold);
+    color: #000;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8), 0 0 15px var(--gold);
+    transition: all 0.3s ease;
+    z-index: 9999;
+}
+
+#backToTop:hover {
+    transform: translateY(-5px);
+    background: var(--gold-light);
+    box-shadow: 0 8px 20px rgba(164, 113, 73, 0.8);
+}
+
+@media (max-width: 480px) {
+    #backToTop {
+        bottom: 30px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
+        font-size: 1.2rem;
+    }
+}
+
+@keyframes drift {
+    0% {
+        transform: translate3d(0, 0, 0) scale(1);
+        opacity: 0.3;
+    }
+
+    50% {
+        transform: translate3d(50px, 30px, 0) scale(1.1);
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: translate3d(-40px, 50px, 0) scale(0.9);
+        opacity: 0.3;
+    }
+}
+
+/* محتوى البانر */
+.hero-section .hero-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    width: 100%;
+    max-width: 800px;
+    animation: float 6s infinite ease-in-out;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.hero-section .brand-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    /* تحكم أفضل في التباعد بين العناصر */
+}
+
+/* العنوان العريض */
+.hero-section .brand-text .main-title {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    /* تكبير بسيط للملء ومتجاوب مع الشاشات */
+    font-weight: 900;
+    margin: 0;
+    /* إزالة هوامش H1 الافتراضية المزعجة */
+    line-height: 1.1;
+    color: var(--gold);
+    /* تدرج لوني ثابت وناعم لتفادي مشكلة التقطيع (Glitch) في بعض المتصفحات */
+    background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 5px 20px rgba(164, 113, 73, 0.4);
+    letter-spacing: 2px;
+    opacity: 0;
+    transform: translate3d(0, 20px, 0);
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    -webkit-font-smoothing: antialiased;
+    /* حركة دخول انسيابية فقط بدون تحريك الخلفية */
+    animation: fadeInUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards 0.2s;
+    position: relative;
+    padding-bottom: 25px;
+    /* مساحة للخط الزخرفي */
+}
+
+/* خط زخرفي فاخر تحت العنوان يملأ الفراغ بشكل أنيق */
+.hero-section .brand-text .main-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    border-radius: 2px;
+    box-shadow: 0 0 12px rgba(164, 113, 73, 0.6);
+}
+
+/* العبارة الترويجية والموقع */
+.hero-section .brand-text .tagline {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--text-white);
+    letter-spacing: 1px;
+    margin: 5px 0 0 0;
+    /* تصفير الهوامش لضبط التباعد */
+    opacity: 0;
+    transform: translate3d(0, 20px, 0);
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+    animation: fadeInUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards 0.5s;
+}
+
+.hero-section .brand-text .location {
+    font-size: 1.05rem;
+    font-weight: 400;
+    color: rgba(224, 224, 224, 0.8);
+    /* تم دمج الشفافية باللون بدلاً من opacity للأنميشن */
+    opacity: 0;
+    /* الشفافية 0 لتبدأ مخفية وتدخل بانسيابية */
+    margin: -8px 0 0 0;
+    /* قيمة سلبية لتقريبها بشكل كبير من العبارة الترويجية */
+    transform: translate3d(0, 20px, 0);
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    animation: fadeInUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards 0.7s;
+}
+
+
+/* ======== تنسيق الأقسام والأصناف (Dark Mode) ======== */
+.container {
+    padding: 30px 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.menu-section {
+    margin-bottom: 25px;
+    /* تقليل المسافة لأنها ستصبح قابلة للطي */
+}
+
+/* ======== تنسيق الأكورديون (الأقسام القابلة للطي) ======== */
+.menu-accordion {
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 14px;
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+    transition: all 0.4s ease;
+}
+
+.menu-accordion[open] {
+    background: rgba(255, 255, 255, 0.04);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border-color: rgba(164, 113, 73, 0.4);
+    margin-bottom: 40px;
+    /* مسافة إضافية عند الفتح للمحتوى الطويل */
+}
+
+/* التخلص من سهم details الافتراضي */
+.menu-accordion summary::-webkit-details-marker {
+    display: none;
+}
+
+.menu-accordion summary {
+    list-style: none;
+}
+
+/* التحسين: مؤشر ذكي (+ / -) داخل الأكورديون */
+.accordion-icon::before {
+    content: '+';
+    font-size: 1.4rem;
+    font-weight: 400;
+}
+
+.menu-accordion[open] .accordion-icon::before {
+    content: '−';
+}
+
+.category-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(90deg, transparent, rgba(164, 113, 73, 0.1), transparent);
+    color: var(--gold);
+    padding: 18px 25px;
+    /* توحيد الحجم والمسافات بدقة */
+    margin: 0;
+    font-size: 1.4rem;
+    /* ضبط حجم متناسق مع باقي المكونات */
+    font-weight: 900;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.3s ease;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    border-bottom: 1px solid rgba(164, 113, 73, 0.1);
+    /* خط فاصل خفيف يضيف فخامة للعنوان المغلق */
+    box-sizing: border-box;
+    /* لضمان عدم تأثر العرض بالبادينج */
+}
+
+.category-title:hover {
+    background: linear-gradient(90deg, transparent, rgba(164, 113, 73, 0.15), transparent);
+    color: #fff;
+    padding-right: 30px;
+    transform: scale(1.01);
+    /* لمسة فخمة وبسيطة جداً عند التمرير */
+}
+
+.accordion-icon {
+    font-size: 1.2rem;
+    color: var(--gold);
+    transition: transform 0.3s ease-out;
+}
+
+.menu-accordion[open] .category-title {
+    border-bottom-color: rgba(164, 113, 73, 0.4);
+    /* توضيح الخط عند فتح القسم */
+}
+
+.menu-accordion[open] .category-title .accordion-icon {
+    transform: rotate(180deg);
+}
+
+/* محتوى القسم الداخلي (المخفي بشكل افتراضي) */
+.accordion-content {
+    padding: 20px 25px 30px;
+    /* تمديد العرض ليتناسق تماما مع عنوان الأكورديون */
+    animation: fadeInDown 0.5s ease-out forwards;
+}
+
+/* ======== تنسيق بانر القسم (Section Banner) ======== */
+.section-banner {
+    width: 100%;
+    height: 180px;
+    margin-bottom: 25px;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.section-banner::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.7));
+    pointer-events: none;
+}
+
+.section-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.menu-accordion[open] .section-banner img {
+    /* حركة زووم هادئة جداً عند فتح القسم */
+    animation: bannerZoom 12s ease-out forwards;
+    filter: brightness(1.1);
+}
+
+@keyframes bannerZoom {
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(1.08);
+    }
+}
+
+@media (max-width: 480px) {
+    .section-banner {
+        height: 140px;
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* التحسين: توهج العناوين الفرعية */
+.sub-category-title {
+    color: var(--gold);
+    border-right: 4px solid var(--gold);
+    padding-right: 15px;
+    margin: 35px 0 20px;
+    font-size: 1.25rem;
+    font-weight: 800;
+    background: linear-gradient(90deg, rgba(164, 113, 73, 0.1) 0%, transparent 100%);
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 0 8px 8px 0;
+    text-shadow: 0 0 10px rgba(164, 113, 73, 0.3);
+}
+
+.items-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+}
+
+/* شبكة للشاشات الأكبر */
+@media (min-width: 768px) {
+    .items-list {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+}
+
+/* التحسين: تأثير اللمعة الزجاجية (Glass Shine) عند التمرير */
+.menu-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--card-bg);
+    /* استخدام المتغير المحسن للتباين */
+    padding: 16px 20px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    /* استخدام المتغير المحسن للحدود */
+    /* لمسة نحاسية خفيفة جدًا للحدود */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+    /* إضافة ظل لزيادة التباين والعمق */
+    transition: all 0.3s ease-out;
+    position: relative;
+    overflow: hidden;
+    gap: 15px;
+}
+
+.menu-item:hover {
+    transform: translateY(-4px) scale(1.01);
+    border-color: var(--gold);
+    /* جعل الحدود ساطعة عند التمرير */
+    background: linear-gradient(110deg, #1a1a1a 45%, #252525 50%, #1a1a1a 55%);
+    background-size: 200% 100%;
+    animation: glassShine 1.5s infinite;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+}
+
+@keyframes glassShine {
+    to {
+        background-position-x: -200%;
+    }
+}
+
+/* حركة متتابعة للعناصر عند فتح القسم */
+.menu-accordion:not([open]) .menu-item {
+    opacity: 0;
+}
+
+.menu-accordion[open] .menu-item {
+    opacity: 0;
+    transform: translateY(15px);
+    animation: fadeInUpItem 0.5s ease-out forwards;
+}
+
+@keyframes fadeInUpItem {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.menu-accordion[open] .menu-item:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.menu-accordion[open] .menu-item:nth-child(2) {
+    animation-delay: 0.15s;
+}
+
+.menu-accordion[open] .menu-item:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.menu-accordion[open] .menu-item:nth-child(4) {
+    animation-delay: 0.25s;
+}
+
+.menu-accordion[open] .menu-item:nth-child(5) {
+    animation-delay: 0.3s;
+}
+
+.menu-accordion[open] .menu-item:nth-child(n+6) {
+    animation-delay: 0.35s;
+}
+
+/* تأثير الخط اللامع الجانبي */
+.menu-item::before {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 3px;
+    background: var(--gold);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.menu-item:hover::before {
+    opacity: 1;
+}
+
+/* اسم الطبق والوصف */
+.menu-item .item-info {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+    /* يأخذ المساحة المتبقية */
+}
+
+/* للأصناف التي لا تحتوي على .item-info ومكتوبة مباشرة داخل span */
+.menu-item>span:first-child {
+    flex: 1;
+    font-weight: 700;
+    color: var(--text-white);
+    font-size: 1.05rem;
+    line-height: 1.4;
+}
+
+.menu-item .item-name {
+    font-weight: 800;
+    color: var(--text-white);
+    font-size: 1.1rem;
+}
+
+.menu-item .item-desc {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 400;
+}
+
+/* السعر وخيارات السعر */
+.price-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-shrink: 0;
+    min-width: 125px;
+    /* تثبيت عرض العمود لتكون الأسعار على صف واحد عموديًا */
+}
+
+.price-options .price {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.price-options .price .size {
+    font-size: 0.8rem;
+    color: var(--gold-dark);
+    /* جعل النص داكنًا قليلًا نحاسيًا بدل الرمادي */
+    font-weight: 700;
+}
+
+.menu-item:hover .price-options .price .size {
+    color: #fff;
+    /* تباين أفضل عند التمرير */
+}
+
+.menu-item .price {
+    background: rgba(164, 113, 73, 0.15);
+    /* زيادة طفيفة في الخلفية لبروز السعر */
+    /* تخفيف خلفية السعر لتبدو أرقى */
+    color: var(--gold-light);
+    /* استخدام لون أفتح للتباين */
+    border: 1px solid var(--gold);
+    /* حدود صريحة للسعر */
+    padding: 6px 16px;
+    border-radius: 8px;
+    /* تقليل الاستدارة للحصول على طابع كلاسيكي فاخر */
+    font-weight: 800;
+    font-size: 1rem;
+    flex-shrink: 0;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+}
+
+.menu-item:hover .price {
+    background: var(--gold);
+    color: #000;
+}
+
+/* الفوتر */
+.main-footer {
+    text-align: center;
+    padding: 30px 20px 20px;
+    margin-top: 30px;
+    background: linear-gradient(to top, #050505, transparent);
+    color: var(--text-muted);
+    border-top: 1px solid rgba(164, 113, 73, 0.1);
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.footer-title {
+    color: var(--gold);
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin: 0;
+}
+
+.footer-desc {
+    display: none;
+}
+
+.footer-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.footer-socials {
+    display: flex;
+    gap: 10px;
+}
+
+.footer-socials a {
+    color: var(--text-white);
+    font-size: 1.1rem;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.footer-socials a:hover {
+    background: var(--gold);
+    color: #000;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(164, 113, 73, 0.4);
+    border-color: var(--gold);
+}
+
+.contact-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(164, 113, 73, 0.1);
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    padding: 8px 20px;
+    border-radius: 25px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.contact-btn:hover {
+    background: var(--gold);
+    color: #000;
+    box-shadow: 0 5px 20px rgba(164, 113, 73, 0.4);
+    transform: translateY(-2px);
+}
+
+.footer-watermark {
+    display: none;
+}
+
+.copyright {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.4);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 15px;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 20px, 0);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .sticky-nav {
+        padding: 10px 15px;
+    }
+
+    .sticky-nav .nav-logo img {
+        width: 45px;
+        height: 45px;
+    }
+
+    .sticky-nav .social-links a {
+        width: 32px;
+        height: 32px;
+        font-size: 0.95rem;
+    }
+
+    .hero-section {
+        min-height: 350px;
+    }
+
+    .hero-section .brand-text .tagline {
+        font-size: 1rem;
+    }
+
+    .fancy-header {
+        min-height: 400px;
+    }
+
+    .menu-accordion[open] {
+        margin-bottom: 20px;
+    }
+
+    .accordion-content {
+        padding: 15px 15px 20px;
+    }
+
+    .sub-category-title {
+        margin: 25px 0 15px;
+        font-size: 1.15rem;
+    }
+
+    .category-title {
+        font-size: 1.15rem;
+        padding: 14px 16px;
+    }
+
+    .items-list {
+        gap: 12px;
+    }
+
+    .menu-item {
+        padding: 12px 14px;
+        gap: 10px;
+    }
+
+    .menu-item .item-name,
+    .menu-item>span:first-child {
+        font-size: 0.95rem;
+    }
+
+    .price-options {
+        min-width: 110px;
+        gap: 6px;
+    }
+
+    .menu-item .price {
+        font-size: 0.85rem;
+        padding: 5px 10px;
+    }
+}
+
+
+/* ======= Ice Cream Premium Cards (New Design) ======= */
+.ice-cream-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 30px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+    transition: all 0.4s ease;
+    overflow: hidden;
+    position: relative;
+    grid-column: 1 / -1;
+    /* ملء العرض بالكامل */
+}
+
+.ice-cream-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--gold);
+    box-shadow: 0 20px 45px rgba(164, 113, 73, 0.2);
+}
+
+.card-title-ice {
+    font-size: 1.6rem;
+    color: var(--gold);
+    text-align: center;
+    margin-bottom: 25px;
+    font-weight: 900;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.card-title-ice::before,
+.card-title-ice::after {
+    content: '';
+    height: 2px;
+    width: 40px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.ice-options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+.option-box {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(164, 113, 73, 0.2);
+    border-radius: 15px;
+    padding: 20px;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.option-box:hover {
+    background: rgba(164, 113, 73, 0.05);
+    border-color: var(--gold);
+}
+
+.option-header-ice {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    color: var(--text-white);
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.option-header-ice i {
+    color: var(--gold);
+}
+
+.scoop-pricing-ice {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.scoop-row-ice {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.scoop-row-ice:last-child {
+    border-bottom: none;
+}
+
+.scoop-label-ice {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.scoop-val-ice {
+    color: var(--gold-light);
+    font-weight: 800;
+    font-size: 1.1rem;
+}
+
+@media (max-width: 600px) {
+    .ice-options-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .card-title-ice {
+        font-size: 1.3rem;
+    }
+
+    .ice-cream-card {
+        padding: 20px 15px;
+    }
+}
+
+@keyframes goldPulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(164, 113, 73, 0.4);
+    }
+
+    70% {
+        box-shadow: 0 0 0 15px rgba(164, 113, 73, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(164, 113, 73, 0);
+    }
+}
